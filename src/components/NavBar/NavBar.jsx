@@ -1,4 +1,5 @@
 import capyLogo from '../images/capybara-logo.png';
+import { Link } from 'react-router-dom';
 import './style.css';
 import CartWidget from '../CartWidget/CartWidget';
 
@@ -13,16 +14,24 @@ const Navbar = () => {
             <div className="navbar__links">
                 <ul>
                     <li>
-                        <button className="util-btn">Remeras</button>
+                        <Link to={"/category/men's-clothing"} className="util-btn">
+                            Hombre
+                        </Link>
                     </li>
                     <li>
-                        <button className="util-btn">Camperas</button>
+                        <Link to={"/category/women's-clothing"} className="util-btn">
+                            Mujer
+                        </Link>
                     </li>
                     <li>
-                        <button className="util-btn">Pantalones</button>
+                        <Link to={"/category/jewelry"} className="util-btn">
+                            Accesorios
+                        </Link>
                     </li>
                     <li>
-                        <button className="util-btn">Accesorios</button>
+                        <Link to={"/category/electonics"} className="util-btn">
+                            Electronicos
+                        </Link>
                     </li>
                 </ul>                
             </div>
