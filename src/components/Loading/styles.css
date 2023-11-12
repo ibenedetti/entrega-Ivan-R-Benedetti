@@ -1,0 +1,8 @@
+iframe{
+    position: relative;
+    left: 30vw;
+}
+
+.loading-container {
+    pointer-events: none;
+}

@@ -1,53 +1,102 @@
-import { useEffect , useState } from 'react';
+// import { useEffect, useState } from 'react';
+// import './styles.css';
+// import { Link, useParams } from 'react-router-dom';
+// import Item from "../Item/Item";
+// import Loading from '../Loading/Loading';
+
+// const ItemList = ({ productList }) => {
+//     const [items, setItems] = useState([]);
+//     const { id } = useParams();
+
+//     useEffect(() => {
+//         const myFunction = () => {
+//             if (id) {
+//                 console.log("Category ID:", id);
+
+//                 const filteredItems = productList.filter((product) => {
+//                     return product.category === id;
+//                 });
+//                 console.log("Filtered Items:", filteredItems);
+
+//                 setItems(filteredItems);
+//             } else {
+//                 setItems(productList);
+//             }
+//         };
+
+//         myFunction();
+//     }, [id, productList]);
+
+//     return (
+//         <div className='itemListContainer'>
+//             {items.map((product) => (
+//                 <Link to={'item/' + product.id} key={product.id}>
+//                     <Item
+//                         title={product.title}
+//                         description={product.description}
+//                         price={product.price}
+//                         image={product.image}
+//                     />
+//                 </Link>
+//             ))}
+//         </div>
+//     );
+// };
+
+// export default ItemList;
+
+
+import { useEffect, useState } from 'react';
 import './styles.css';
-import { Link , useParams} from 'react-router-dom';
-import Item from "../Item/Item"
+import { Link, useParams } from 'react-router-dom';
+import Item from '../Item/Item';
+import Loading from '../Loading/Loading';
 
 const ItemList = ({ productList }) => {
   const [items, setItems] = useState([]);
-  const {id} = useParams();
-
-  const fetchProducts = () => {
-    fetch('https://fakestoreapi.com/products?limit=15')
-    .then((response) => response.json())
-    .then((json) => setItems(json))
-    .catch((error) => console.log(error));
-  };
+  const [loading, setLoading] = useState(true);
+  const { id } = useParams();
 
   useEffect(() => {
-    fetchProducts();
-    if (id) {
-      const filteredProducts = items.filter((product) => {
-        const category = product.category.includes('-')
-          ? product.category.replace('-', ' ')
-          : product.category;
-        return category === id;
-      });
-      setItems(filteredProducts);
-    } else {
-      fetchProducts();
-    }
-  }, [id, items]);
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
+    const myFunction = () => {
+      setLoading(true);
+      const delayMilliseconds = 2000;
+  
+      setTimeout(() => {
+        if (id) {
+          const filteredItems = productList.filter(
+            (product) => product.category === id
+          );
+          setItems(filteredItems);
+        } else {
+          setItems(productList);
+        }
+  
+        setLoading(false);
+      }, delayMilliseconds);
+    };
+  
+    myFunction();
+  }, [id, productList]);
 
   return (
-    <div className='itemListContainer'>
-        {productList.map((product) => (
-                <Link to={'item/' + product.id} key={product.id}>
-                    <Item                        
-                        title={product.title}
-                        description={product.description}
-                        price={product.price}
-                        image={product.image}
-                    />
-                </Link>
-            ))}
-        
+    <div className="itemListContainer">
+      {loading ? (
+        <Loading />
+      ) : (
+        items.map((product) => (
+          <Link to={'item/' + product.id} key={product.id}>
+            <Item
+              title={product.title}
+              description={product.description}
+              price={product.price}
+              image={product.image}
+            />
+          </Link>
+        ))
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default ItemList
+export default ItemList;
