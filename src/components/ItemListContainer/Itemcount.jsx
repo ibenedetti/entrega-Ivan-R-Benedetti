@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 
-const Intemcount = () => {
+const Itemcount = () => {
   const [count, setCount] = useState(0);
   const [stock, setStock] = useState(5);
 
@@ -21,4 +21,4 @@ const Intemcount = () => {
   </div>
 }
 
-export default Intemcount
+export default Itemcount

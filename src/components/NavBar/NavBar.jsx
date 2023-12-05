@@ -32,7 +32,9 @@ const Navbar = () => {
                 </ul>                
             </div>
             <div className='cart'>
+                <Link to={"/cart"} className="util-btn">
                 <CartWidget/>
+                </Link>
             </div>            
         </div>        
     )
