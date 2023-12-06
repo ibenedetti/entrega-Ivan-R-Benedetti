@@ -1,6 +1,10 @@
 import { useState , useEffect } from 'react';
 import ItemList from "../ItemList/ItemList";
 import Intemcount from "./Itemcount";
+import ClientFactory from '../../config/ClientFactory';
+
+const {product} = ClientFactory()
+console.log("file: ClientFactory.jsx ~ line 1 ~ ClientFactory ~ products", product)
 
 const ItemListContainer = () => {
   
