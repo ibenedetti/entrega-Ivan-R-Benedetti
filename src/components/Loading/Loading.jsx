@@ -12,13 +12,9 @@ const Loading = () => {
         title="loading"
         allowFullScreen
       ></iframe>
-      <p>
-        <a href="https://giphy.com/gifs/capybara-capy-spinning-OgUorGH0Z75b3unoPA">
-          via GIPHY
-        </a>
-      </p>
     </div>
   );
 };
 
 export default Loading;
+

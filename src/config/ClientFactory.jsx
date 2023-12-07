@@ -32,7 +32,6 @@ import { db } from "./configFirebase";
 const ClientFactory = () => {
     const [product, setProducts] = useState({});
 
-
     useEffect(() => {
         const productsDoc = doc(db, 'items', '1oXusYUYmRUS6V7Y2jar');
         getDoc(productsDoc).then((snapshot) => {
