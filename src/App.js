@@ -4,12 +4,12 @@ import Navbar from "./components/NavBar/NavBar";
 import ItemListContainer from "./components/ItemListContainer/ItemListContainer";
 import Cart from './page/Cart/Cart';
 import CheckOut from './page/CheckOut/CheckOut'; 
-import { CartContext } from './Context/CartContext';
+import CartProvider from './Context/CartProvider';
 
 function App() {
   return (
     <BrowserRouter>
-      <CartContext>
+      <CartProvider> {}
         <Navbar />
         <Routes>
           <Route path="/" element={<ItemListContainer />} />
@@ -18,7 +18,8 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<CheckOut />} /> 
         </Routes>
-      </CartContext>
+        {}
+      </CartProvider>
     </BrowserRouter>
   );
 }

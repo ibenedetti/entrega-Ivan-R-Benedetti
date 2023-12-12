@@ -24,24 +24,23 @@
 // }
 
 // export default ClientFactory
-
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { doc, getDoc } from 'firebase/firestore';
-import { db } from "./configFirebase";
+import firestore from './configFirebase';
 
 const ClientFactory = () => {
-    const [product, setProducts] = useState({});
+  const [product, setProduct] = useState({});
 
-    useEffect(() => {
-        const productsDoc = doc(db, 'items', '1oXusYUYmRUS6V7Y2jar');
-        getDoc(productsDoc).then((snapshot) => {
-            if (snapshot.exists()) {
-                setProducts({ id: snapshot.id, ...snapshot.data() });
-            }
-        });
-    }, []);
+  useEffect(() => {
+    const productsDoc = doc(firestore, 'items', '1oXusYUYmRUS6V7Y2jar');
+    getDoc(productsDoc).then((snapshot) => {
+      if (snapshot.exists()) {
+        setProduct({ id: snapshot.id, ...snapshot.data() });
+      }
+    });
+  }, []);
 
-    return product;
-}
+  return product;
+};
 
 export default ClientFactory;

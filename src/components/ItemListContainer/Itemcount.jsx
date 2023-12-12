@@ -5,6 +5,8 @@ const Itemcount = () => {
   const [count, setCount] = useState(0);
   const [stock, setStock] = useState(5);
 
+
+
   const onAdd = () => {
     if (count === stock) return;
     setCount(count + 1);

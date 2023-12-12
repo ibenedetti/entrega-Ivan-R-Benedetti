@@ -1,3 +1,4 @@
+import React from 'react';
 import capyLogo from '../images/capybara-logo.png';
 import { Link } from 'react-router-dom';
 import './style.css';
