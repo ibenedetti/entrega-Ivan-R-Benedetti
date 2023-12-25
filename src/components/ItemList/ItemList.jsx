@@ -37,7 +37,7 @@ const ItemList = ({ productList }) => {
         <Loading />
       ) : (
         items.map((product) => (
-          <Link to={'item/' + product.id} key={product.id}>
+          <Link to={`/item/${product.id}`} key={product.id} className="util-btn">
             <Item
               title={product.title}
               description={product.description}

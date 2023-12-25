@@ -1,26 +1,40 @@
-import { useState } from 'react'
+import React, { useState } from 'react';
+import './style.css';
 
+const ItemCount = ({ initial, stock, onAdd }) => {
+  const [quantity, setQuantity] = useState(initial || 1);
 
-const Itemcount = () => {
-  const [count, setCount] = useState(0);
-  const [stock, setStock] = useState(5);
-
-
-
-  const onAdd = () => {
-    if (count === stock) return;
-    setCount(count + 1);
-  };
-  const onSubstract = () => {
-    if (count === 0) return;
-    setCount(count - 1);
+  const increment = () => {
+    if (quantity < stock) setQuantity(quantity + 1);
   };
 
-  return <div>
-    <button onClick={onSubstract}>-</button>
-    <span>{count}</span>
-    <button onClick={onAdd}>+</button>
-  </div>
-}
+  const decrement = () => {
+    if (quantity > 0) setQuantity(quantity - 1);
+  };
 
-export default Itemcount
+  return (
+    <div className="ItemCount">
+      <div>
+        <button onClick={decrement}>
+          -
+        </button>
+        <h4 style={{ display: 'inline-block' }}>
+          {quantity}
+        </h4>
+        <button onClick={increment}>
+          +
+        </button>
+      </div>
+      <div>
+        <button
+          onClick={() => onAdd(quantity)}
+          disabled={!stock || !quantity || quantity > stock}
+        >
+          Agregar al carrito
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default ItemCount;

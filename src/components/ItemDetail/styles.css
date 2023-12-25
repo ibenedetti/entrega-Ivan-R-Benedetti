@@ -43,3 +43,25 @@ img{
     height: 50%;
     border-radius: 10px;
 }
+
+.card-img{
+    position:relative;
+    height:30vh;
+    width:30vh;
+}
+
+.card-img img{
+    height:100%;
+    width:100%;
+}
+
+iframe{
+    position: relative;
+    right: 30vw;
+}
+
+.container .loading-container {
+    pointer-events: none;
+    position: relative;
+    right: 30vw;
+}

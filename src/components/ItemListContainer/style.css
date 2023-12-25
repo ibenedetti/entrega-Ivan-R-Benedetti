@@ -1,0 +1,58 @@
+button{
+    border:none;
+    background: #0e0e0e;
+    color: #e1e1e1;
+}
+
+.counter{
+    height:30px;
+    width: 30px;
+}
+
+.big-button{  
+    position: relative; 
+    border:10px  solid  black;
+    background: #0e0e0e;
+    color: #e1e1e1;
+    text-transform: uppercase;
+    height: 30px;
+    transition: 0.5s;
+    left:-3.5vw;
+}
+
+.button-right{
+    position: relative;
+    left:10px;
+}
+
+.link{   
+    position: relative; 
+    border:10px  solid  black;
+    background: #0e0e0e;
+    color: #e1e1e1;
+    text-transform: uppercase;
+    height: 30px;
+    transition: 0.5s;
+}
+
+.link-right{
+    left:10px;
+}
+
+.link:hover{   
+    position: relative; 
+    border:10px  solid  #e1e1e1;
+    background:#e1e1e1 ;
+    color:#0e0e0e ;
+    text-transform: uppercase;
+    height: 30px;
+}
+
+.big-button:hover{   
+    position: relative; 
+    border:10px  solid  #e1e1e1;
+    background:#e1e1e1 ;
+    color:#0e0e0e ;
+    text-transform: uppercase;
+    height: 30px;
+}

@@ -57,10 +57,20 @@
 
 .cart{
     position: absolute;
-    top: 12vh;
+    top: 5vh;
     right: 5vw;
 }
 
 .cart svg{
-    scale:1.2;
+    scale:1.5;
+}
+
+.cart-btn{
+    background: transparent;
+}
+
+.cart-num{
+    color:#040404;
+    display: block;
+    font-size: larger;
 }

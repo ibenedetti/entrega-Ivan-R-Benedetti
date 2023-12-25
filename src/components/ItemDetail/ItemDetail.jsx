@@ -1,76 +1,82 @@
-// import { useState } from 'react';
-// import './styles.css';
-// import Itemcount from '../ItemListContainer/Itemcount';
-// import { useNavigate } from 'react-router-dom';
-// import { useContext } from "react";
-// import { CartContext } from '../../Context/CartContext';
-
-// const { additem } = useContext(CartContext);
-
-// const ItemDetail = ({ itemSelected }) => {
-//   const [count, setCount] = useState(0);
-//   const stock = useState(5);
-//   const navigate = useNavigate();
-
-//   const handleNavigation = () => { 
-//     navigate('/cart');
-//   }
-//   return (
-//     <div className='container'>
-//       <h6 className='card-title'>{itemSelected?.title}</h6>
-//       <img src={itemSelected?.image} alt={itemSelected?.title} width={70} />
-//       <div className='card-description'>
-//         <p>{itemSelected?.description}</p>
-//       </div>
-
-//       <span>Stock: {stock}</span>
-//       <p>{itemSelected?.price}</p>
-    
-//       <div>
-//         <button onClick={additem}></button>
-//         <button onClick={handleNavigation}>Terminar mi compra</button>
-//         <Itemcount count={count} setCount={setCount} stock={stock} />
-//       </div>
-//     </div>
-//   )
-// }
-
-// export default ItemDetail
-
-import { useState } from 'react';
-import './styles.css';
+import React, { useContext, useState } from 'react';
 import Itemcount from '../ItemListContainer/Itemcount';
-import { useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
-import { CartContext } from '../../Context/CartContext';
+import { Link } from 'react-router-dom';
+import { CartContext } from '../../Context/CartProvider';
+import Loading from '../Loading/Loading';
+import './styles.css';
 
-const ItemDetail = ({ itemSelected }) => {
-  const { additem } = useContext(CartContext); // Move inside the component body
-  const [count, setCount] = useState(0);
-  const stock = useState(5);
-  const navigate = useNavigate();
+const ItemDetail = ({ id, title, price, category, image, stock, description }) => {
+  const { addItemToCart } = useContext(CartContext);
+  const [quantityAdded, setQuantityAdded] = useState(0);
+  const [loading, setLoading] = useState(true);
 
-  const handleNavigation = () => {
-    navigate('/cart');
+  const handleAddToCart = (quantity) => {
+    setQuantityAdded(quantity);
+    const item = {
+      id,
+      title,
+      price,
+      image,
+      stock,
+    };
+  
+    addItemToCart(item, quantity);
+    console.log(item, quantity);
   };
 
+  setTimeout(() => {
+    setLoading(false);
+  }, 2000);
+
   return (
-    <div className='container'>
-      <h6 className='card-title'>{itemSelected?.title}</h6>
-      <img src={itemSelected?.image} alt={itemSelected?.title} width={70} />
-      <div className='card-description'>
-        <p>{itemSelected?.description}</p>
-      </div>
+    <article className="container">
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <header className="card-title">
+            <h3>{title}</h3>
+          </header>
+          <picture className="card-img">
+            <img src={image} alt={title} />
+          </picture>
+          <div className="card-description">
+            <p>
+              Descripción:<b> {description}</b>
+            </p>
+            <p>
+              Categoría: <b>{category}</b>
+            </p>
+            <div>
+              <p>
+                Stock: <b>{stock}</b>
+              </p>
+            </div>
 
-      <span>Stock: {stock}</span>
-      <p>{itemSelected?.price}</p>
-
-      <div>
-        <button onClick={additem()}></button>
-        <button onClick={handleNavigation}>Terminar mi compra</button>
-        <Itemcount count={count} setCount={setCount} stock={stock} />
-      </div>
-    </div>
+            <p className="card-description">
+              Precio:<b> ${price}</b>
+            </p>
+          </div>
+          <div>
+            {quantityAdded > 0 ? (
+              <>
+                <p>¡Producto agregado al carrito!</p>
+                <Link to="/" className="link link-left">
+                  Seguir Comprando
+                </Link>
+                <Link to="/cart" className="link link-right">
+                  Terminar Compra
+                </Link>
+              </>
+            ) : (
+              <>
+                <Itemcount initial={0} stock={stock} onAdd={handleAddToCart} />
+              </>
+            )}
+          </div>
+        </>
+      )}
+    </article>
   );
 };
 

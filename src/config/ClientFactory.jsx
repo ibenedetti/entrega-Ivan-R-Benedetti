@@ -1,46 +1,29 @@
-// import { useState, useEffect } from 'react';
-// import { doc, getDoc } from 'firebase/firestore';
-// import { db } from "./configFirebase";
-
-
-// const ClientFactory = () => {
-
-    
-
-//     const [product, setProducts] = useState([])
-
-//     useEffect(() => {
-//         const products = doc(db, 'items', '1oXusYUYmRUS6V7Y2jar');
-//         getDoc(products).then((snapshot) => {
-//            if (snapshot.exists()) {
-//                setProducts({ id: snapshot.id, ...snapshot.data() });
-//            }
-//         });
-//     }, []);
-
-//   return (
-//     product
-//   )
-// }
-
-// export default ClientFactory
 import { useEffect, useState } from 'react';
-import { doc, getDoc } from 'firebase/firestore';
+import { collection, getDocs } from 'firebase/firestore';
 import firestore from './configFirebase';
 
 const ClientFactory = () => {
-  const [product, setProduct] = useState({});
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    const productsDoc = doc(firestore, 'items', '1oXusYUYmRUS6V7Y2jar');
-    getDoc(productsDoc).then((snapshot) => {
-      if (snapshot.exists()) {
-        setProduct({ id: snapshot.id, ...snapshot.data() });
+    const fetchProducts = async () => {
+      try {
+        const productsCollection = collection(firestore, 'items');
+        const querySnapshot = await getDocs(productsCollection);
+        const productsData = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setProducts(productsData);
+      } catch (error) {
+        console.error('Error fetching products:', error);
       }
-    });
+    };
+
+    fetchProducts();
   }, []);
 
-  return product;
+  return products;
 };
 
 export default ClientFactory;
